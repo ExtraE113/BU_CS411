@@ -1,4 +1,4 @@
-#Ideas
+# Ideas
 
 - Music search
   - Some songs are only available on eg Apple music, Spotify, Soundcloud– unified search + player for multiple places
