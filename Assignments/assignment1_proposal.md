@@ -14,3 +14,8 @@
   - As a BU student I don’t want to type in my classes by hand into my calendar, I want them to sync automatically.
   - Could also handle eg President’s Day holiday where tues is a monday schedule of classes
   - Depends on getting access to student link API
+- Podcast adblock
+  - Load podcasts from Spotify/RSS feeds
+  - Transcribe
+  - Use LLM to detect what part of the trascript is advertising
+  - Skip that part during playback
