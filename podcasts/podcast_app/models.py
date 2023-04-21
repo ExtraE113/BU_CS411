@@ -23,4 +23,4 @@ class Episode(models.Model):
     ad_timestamps = models.JSONField(null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title 
