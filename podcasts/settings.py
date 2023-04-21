@@ -144,10 +144,10 @@ SITE_ID = 1
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
+        'AUTH_PARAMS': {'access_type': 'offline'},
         'APP': {
-            'client_id': '708378597417-0v12l611cch6jioq9oj05b354oe65c50.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': '708378597417-g4gp2dmet2rarqs4bb6djof4e3kfnu72.apps.googleusercontent.com',
+            'secret': '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',
             'key': ''
         }
     }
