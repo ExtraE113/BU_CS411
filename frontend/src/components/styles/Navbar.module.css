@@ -1,0 +1,23 @@
+.navbarWrapper {
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+}
+
+.logoWrapper {
+    margin-left: 2em;
+}
+
+.dashboardWrapper {
+
+}
+
+.accountWrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.accountWrapper > p {
+    margin-right: 2em;
+}
