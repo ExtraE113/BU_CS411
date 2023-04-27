@@ -11,6 +11,7 @@ from rest_framework.response import Response
 class PodcastList(generics.ListAPIView):
     queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
+    
 
 class EpisodeList(generics.ListAPIView):
     serializer_class = EpisodeSerializer
@@ -37,22 +38,3 @@ class UnsubscribeFromPodcast(APIView):
         podcast.users.remove(request.user)
         podcast.save()
         return Response({'status': 'success', 'message': 'Unsubscribed from podcast.'})
-
-
-
-
-#gets the podcasts thats feeded into it 
-#and splices out the adblock
-
-
-
-
-    
-
-
-
-
-
-
-
-
