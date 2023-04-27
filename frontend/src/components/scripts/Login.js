@@ -22,7 +22,7 @@ function Login() {
 
     const createAccount = e => {
         e.preventDefault();
-        
+
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
         .then((auth) => {

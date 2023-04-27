@@ -1,0 +1,9 @@
+.favorites {
+    text-align: center;
+    margin-top: 2em;
+}
+
+.addPodcastBtn {
+    display: block;
+    margin: 0 auto;
+}
