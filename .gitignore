@@ -1,4 +1,5 @@
 .idea
 /podcasts/access_token.txt
 /podcasts/openai_api_key.txt
-/podcast_app/__pycache__/*
+*.pyc
+*.pyo
