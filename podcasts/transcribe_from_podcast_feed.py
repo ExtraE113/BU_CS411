@@ -5,7 +5,7 @@ import requests as requests
 import feedparser
 
 # read token from transcribe_api_token.txt
-with open("test_remove_ads.py") as f:
+with open("access_token.txt") as f:
 	token = f.read()
 
 
@@ -71,8 +71,8 @@ def transcribe_podcast(rss_feed_url: str, rev_ai_api_key: str, max_transcription
 
 
 if __name__ == '__main__':
-	transcript_result = transcribe_podcast('https://www.thisamericanlife.org/podcast/rss	.xml', token)
-	transcript = "\n".join(
-		["".join([x["value"] for x in elem["elements"]]) for elem in transcript_result["monologues"]])
-	print(transcript)
-	print("done")
+	transcript_result = transcribe_podcast('https://www.thisamericanlife.org/podcast/rss.xml', token)
+
+	# save transcript_result to file as json blob
+	with open("transcript.json", "w") as f:
+		json.dump(transcript_result, f)
