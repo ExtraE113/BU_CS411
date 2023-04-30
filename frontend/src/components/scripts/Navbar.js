@@ -9,7 +9,7 @@ function NavBar() {
                 <p>Podcast</p>
             </div>
             <div className = {styles.dashboardWrapper}>
-                <p>Hello {auth.currentUser.email}!</p>
+                {/* <p>Hello {auth.currentUser.email}!</p> */}
             </div>
             <div className = {styles.accountWrapper}>
                 <p>Search</p>
