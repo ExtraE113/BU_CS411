@@ -1,4 +1,5 @@
-aiohttp 
+openai
+aiohttp
 aiosignal 
 alabaster
 anyio 
