@@ -1,7 +1,7 @@
 import json
 import openai
 
-openai.api_key_path = "openai_api_key.txt"
+openai.api_key_path = "../podcast_app/openai_api_key.txt"
 
 
 def mark_ads(transcript, offset=0):
