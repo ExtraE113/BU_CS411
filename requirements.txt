@@ -1,3 +1,4 @@
+django-cors-headers
 openai
 aiohttp
 aiosignal 
