@@ -9,7 +9,7 @@ from rest_framework.response import Response
 # Create your views here.
 
 class PodcastList(generics.ListAPIView):
-    podcastlist = Podcast.objects.all()
+    queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
     
 
@@ -26,7 +26,7 @@ class UserSubscriptions(generics.RetrieveAPIView):
     serializer_class = UserSubscriptionsSerializer
 
     def get_object(self):
-        return self.request.user
+        return self.request.user.subscriptions.all()
 
 class SubscribeToPodcast(APIView):
     permission_classes = [IsAuthenticated]
