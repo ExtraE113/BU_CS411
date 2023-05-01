@@ -34,14 +34,11 @@ def mark_ads(transcript, offset=0):
 
 if __name__ == "__main__":
 	# Read the transcript from the transcript.txt file
-	with open("transcript.json") as f:
+	with open("transcript_tal_excerpt.json") as f:
 		transcript = json.load(f)
 
 	transcript_text = "\n".join(
 		["".join([x["value"] for x in elem["elements"]]) for elem in transcript["monologues"]])
-
-	# only do first quarter for testing
-	transcript_text = transcript_text[:len(transcript_text)//4]
 
 	print(len(transcript_text.split(" ")) / 1000)
 
@@ -52,7 +49,7 @@ if __name__ == "__main__":
 		assistant_message, done = mark_ads(transcript_text, offset)
 
 		# write to file
-		with open(f"marked_transcript{offset}.txt", "w") as f:
+		with open(f"marked_transcript_tal_excerpt{offset}.txt", "w") as f:
 			f.write(assistant_message)
 
 		print(f"writing part {offset} of transcript to file")

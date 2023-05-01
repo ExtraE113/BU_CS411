@@ -21,8 +21,7 @@ def parse_rss_feed(rss_feed: str):
 			if episode_url.type == 'audio/mpeg':
 				episode_audio_urls.append(episode_url.href)
 
-	# skip the first one
-	return episode_audio_urls[1:]
+	return episode_audio_urls
 
 
 def transcribe_podcast(rss_feed_url: str, rev_ai_api_key: str, max_transcriptions: int = 1):
@@ -36,6 +35,10 @@ def transcribe_podcast(rss_feed_url: str, rev_ai_api_key: str, max_transcription
 	# limit the number of episodes to transcribe
 	episode_urls = episode_urls[:max_transcriptions]
 
+	return _transcribe_episodes(episode_urls, rev_ai_api_key)
+
+
+def _transcribe_episodes(episode_urls: list, rev_ai_api_key: str):
 	# Transcribe each episode using rev.ai batch transcription
 	for episode_url in episode_urls:
 		# Submit the transcription job to rev.ai
@@ -71,8 +74,9 @@ def transcribe_podcast(rss_feed_url: str, rev_ai_api_key: str, max_transcription
 
 
 if __name__ == '__main__':
-	transcript_result = transcribe_podcast('https://www.thisamericanlife.org/podcast/rss.xml', token)
-
+	# transcript_result = transcribe_podcast('https://www.thisamericanlife.org/podcast/rss.xml', token)
+	transcript_result = _transcribe_episodes(
+		["https://drive.google.com/uc?export=download&id=16aJlhmpJSF3lKRGl8cTgXAGUMRB-yb9d"], token)
 	# save transcript_result to file as json blob
-	with open("transcript.json", "w") as f:
+	with open("transcript_tal_excerpt.json", "w") as f:
 		json.dump(transcript_result, f)
