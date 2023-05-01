@@ -7,7 +7,7 @@ class Podcast(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     rss_feed_url = models.URLField()
-    category = models.CharField(max_length=100)
+    cover = models.URLField(null=False, blank=False, default='')
     users = models.ManyToManyField(User, related_name='subscriptions')
 
     def __str__(self):
@@ -23,4 +23,4 @@ class Episode(models.Model):
     ad_timestamps = models.JSONField(null=True, blank=True)
 
     def __str__(self):
-        return self.title 
+        return self.title
