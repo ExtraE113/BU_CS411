@@ -12,7 +12,6 @@ class PodcastList(generics.ListAPIView):
     queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
     
-
 class EpisodeList(generics.ListAPIView):
     serializer_class = EpisodeSerializer
 

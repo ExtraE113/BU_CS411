@@ -1,3 +1,4 @@
+drf_social_oauth2
 django-cors-headers
 openai
 aiohttp

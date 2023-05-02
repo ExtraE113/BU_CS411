@@ -4,3 +4,4 @@
 *.pyc
 *.pyo
 /podcast_app/management/commands/config.py
+/podcasts/social.py
