@@ -1,59 +1,44 @@
 import styles from "../styles/Login.module.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, getUserByEmail } from "firebase/auth";
-import { auth, db } from "../../firebase";
+import {useState} from 'react';
+import axios from 'axios';
+import React from 'react';
+import {GoogleOAuthProvider, GoogleLogin} from '@react-oauth/google';
 
-function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+const clientId = "708378597417-g4gp2dmet2rarqs4bb6djof4e3kfnu72.apps.googleusercontent.com";
 
-    const signIn = e => {
-        e.preventDefault();
 
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-        .then(auth => {
-            navigate("/home");
-        })
-        .catch(error => alert(error.message))
+const onSuccess = (response) => {
+        console.log(response)
+        // Send the `response.tokenObj.id_token` to your Django backend to authenticate the user
+        axios.post('http://127.0.0.1:8000/auth/convert-token', {
+            token: response.credential
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+        });
     }
+;
 
-    const createAccount = e => {
-        e.preventDefault();
+const onFailure = (response) => {
+    console.log('Login Failure:', response);
+};
 
-        const auth = getAuth();
-        createUserWithEmailAndPassword(auth, email, password)
-        .then((auth) => {
-            if (auth) {
-                navigate("/home");
-            }
-        })
-        .catch(error => alert(error.message))
-    }
 
+const Login = () => {
     return (
-        <section className = {styles.login}>
-            <div>
-                <h1>Podcast</h1>
-                <form>
-                    <div className = {styles.emailInput}>
-                        <h4 className= {styles.logo3}> Email</h4>
-                        <input type = "text" value = {email} onChange = {e => {setEmail(e.target.value)}} className = {styles.email}/>
-                    </div>
-                    <div className = {styles.passwordInput}>
-                        <h4 className= {styles.logo3}> Password</h4>
-                        <input type = "password" value = {password} onChange = {e => {setPassword(e.target.value)}} className = {styles.password} />
-                    </div>
+        <div>
+            <GoogleOAuthProvider clientId={clientId}>
+                <GoogleLogin
+                    render={({signIn}) => (
+                        <button onClick={signIn}>Login with Google</button>
+                    )}
+                    onSuccess={onSuccess}
+                    onFailure={onFailure}
+                />
+            </GoogleOAuthProvider>
+        </div>
 
-                    <button type = "submit" onClick = {signIn} className = {styles.signInBtn}>Sign In</button>
-                </form>
-
-                <p className = {styles.message}>Don't have an account? Create one here!</p>
-                <button className = {styles.createAccBtn} onClick = {createAccount}>Create your account</button>
-            </div>
-        </section>
     );
 }
 

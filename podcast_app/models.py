@@ -35,9 +35,17 @@ class Episode(models.Model):
 	transcription = models.JSONField(null=True, blank=True)
 	scanned_transcripts = models.TextField(null=False, blank=True, default="")
 	cuts = models.JSONField(null=True, blank=True)
-
+	link = models.CharField(max_length=512, null=True, blank=True)
 	def __str__(self):
 		return self.title
+
+	@property
+	def audio_link(self):
+		if self.link is None:
+			return self.audio_file.name
+		else:
+			return self.link
+
 
 	def transcribe_episode(self):
 		p = Path(__file__).with_name('access_token.txt')
@@ -49,8 +57,14 @@ class Episode(models.Model):
 			'Authorization': f'Bearer {token}',
 			'Content-Type': 'application/json'
 		}
+
+		if self.link is None:
+			link = self.audio_file.name # self.audio_file.url doesn't work for some reason
+		else:
+			link = self.link
+
 		data = {
-			'media_url': self.audio_file.name,  # self.audio_file.url doesn't work for some reason
+			'media_url': link,
 			'metadata': f'Transcription for {self}'
 		}
 		response = requests.post('https://api.rev.ai/speechtotext/v1/jobs',
@@ -90,19 +104,24 @@ class Episode(models.Model):
 			model = "gpt-4"
 
 			# Set the system message to instruct the model
-			system_message = "You are an assistant that can identify and mark advertisements in a podcast transcript. Surround all the advertisments with [BEGIN AD] and [END AD] while leaving the text unchanged."
+			system_message = "You are an assistant that can identify and mark advertisements in a podcast transcript. " \
+							"Surround all the advertisments with [BEGIN AD] and [END AD] while leaving the text " \
+							"unchanged. Do not surround text that is not part of an advertisement with " \
+							"[BEGIN AD] and [END AD]."
 
 			split_text = transcript.split(" ")
-
+			user_prompt = " ".join(split_text[offset:offset + 1000])
+			print(user_prompt)
 			# Create a chat completion request with the messages and model parameters
 			response = openai.ChatCompletion.create(
 				model=model,
 				messages=[
 					{"role": "system", "content": system_message},
 					# just run on first 1k words
-					{"role": "user", "content": " ".join(split_text[offset:offset + 1000])}
+					{"role": "user", "content": user_prompt}
 				],
 				temperature=0,
+				top_p=1,
 				max_tokens=4000,
 			)
 
@@ -123,16 +142,16 @@ class Episode(models.Model):
 			if self.scanned_transcripts is None:
 				self.scanned_transcripts = ""
 			self.scanned_transcripts += assistant_message
-
+			print(assistant_message)
 			oset += 500
 
+			self.save()
 		self.save()
-
 	def determine_cut_times(self):
 		# detect sections surrounded by [BEGIN AD] and [END AD] in the edited transcript
-		regex = re.compile(r'\[BEGIN AD\](.*?)\[END AD\]', re.DOTALL)
+		regex = re.compile(r'\[BEGIN AD\](.*?)\[END AD\]', re.DOTALL | re.IGNORECASE)
 		ads = regex.findall(self.scanned_transcripts)
-
+		print(ads)
 		flattened_transcript = []
 		for elem in self.transcription["monologues"]:
 			flattened_transcript.extend(elem["elements"])
@@ -149,7 +168,7 @@ class Episode(models.Model):
 
 			string_transcript_full = "".join([elem['value'] for elem in flattened_transcript[start:end]])
 			assert ad in string_transcript_full, f"ad {ad} not in working area"
-
+			# print(f"ad {ad} in working area")
 			midpoint = (start + end) // 2
 
 			string_transcript_first_half = "".join([elem['value'] for elem in flattened_transcript[start:midpoint]])
@@ -186,6 +205,7 @@ class Episode(models.Model):
 			while flattened_transcript[cut_end].get('end_ts') is None:
 				cut_end -= 1
 			cuts[i] = (cut_start, cut_end)
+		print(cuts)
 		cut_times = []
 		for cut in cuts:
 			cut_times.append((flattened_transcript[cut[0]]['ts'], flattened_transcript[cut[1]]['end_ts']))
