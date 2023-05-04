@@ -4,8 +4,8 @@ import time
 import requests as requests
 import feedparser
 
-# read token from transcribe_api_token.txt
-with open("access_token.txt") as f:
+# read token from access_token.txt
+with open("../podcast_app/access_token.txt") as f:
 	token = f.read()
 
 

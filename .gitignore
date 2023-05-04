@@ -1,6 +1,7 @@
 .idea
-/podcasts/access_token.txt
-/podcasts/openai_api_key.txt
+/podcast_app/access_token.txt
+/podcast_app/openai_api_key.txt
 *.pyc
 *.pyo
 /podcast_app/management/commands/config.py
+/podcasts/social.py
