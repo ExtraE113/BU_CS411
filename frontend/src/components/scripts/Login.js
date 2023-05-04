@@ -8,15 +8,10 @@ const clientId = "708378597417-g4gp2dmet2rarqs4bb6djof4e3kfnu72.apps.googleuserc
 
 
 const onSuccess = (response) => {
-        console.log(response)
-        // Send the `response.tokenObj.id_token` to your Django backend to authenticate the user
-        axios.post('http://127.0.0.1:8000/auth/convert-token', {
-            token: response.credential
-        }).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        });
+        // save the token in local storage
+        localStorage.setItem('token', response.credential);
+        // redirect to home page
+        window.location.href = '/home';
     }
 ;
 

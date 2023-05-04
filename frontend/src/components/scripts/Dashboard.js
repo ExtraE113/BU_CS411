@@ -1,10 +1,11 @@
 import styles from "../styles/Dashboard.module.css";
-import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore"; 
-import React, { useEffect, useState } from 'react';
-import { getAuth } from "firebase/auth";
-import { getFirestore, getDoc } from "firebase/firestore";
+import {db} from "../../firebase";
+import {doc, setDoc} from "firebase/firestore";
+import React, {useEffect, useState} from 'react';
+import {getAuth} from "firebase/auth";
+import {getFirestore, getDoc} from "firebase/firestore";
 import PodcastCards from "./PodcastCards";
+
 // import axios from "axios";
 
 function Dashboard() {
@@ -12,11 +13,18 @@ function Dashboard() {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/podcasts/")
-          .then(response => response.json())
-          .then(data => setPodcasts(data))
-          .catch(error => console.log(error));
-      }, []);
+        // set the authorization header from the token in local storage
+        const token = localStorage.getItem('token');
+        fetch("http://127.0.0.1:8000/podcasts/",
+            {
+                headers: {
+                    Authorization: token,
+                }
+            })
+            .then(response => response.json())
+            .then(data => setPodcasts(data))
+            .catch(error => console.log(error));
+    }, []);
 
     //Axios has some issues as it returns a HTML static file instead of JSON format
 //   useEffect(() => {
@@ -49,15 +57,15 @@ function Dashboard() {
         return <div>Loading...</div>;
     }
 
-    return(
+    return (
         <section>
-            <h1 className = {styles.favorites}>My Favorites</h1>
-            <div>
-                {podcasts && podcasts.map(podcast => (
-                    <PodcastCards data={podcast} />
-                ))}
-            </div>
-            <button className = {styles.addPodcastBtn}>Add Podcast</button>
+            <h1 className={styles.favorites}>My Favorites</h1>
+            {/*<div>*/}
+            {/*    {podcasts && podcasts.map(podcast => (*/}
+            {/*        <PodcastCards data={podcast}/>*/}
+            {/*    ))}*/}
+            {/*</div>*/}
+            <button className={styles.addPodcastBtn}>Add Podcast</button>
         </section>
     );
 }
