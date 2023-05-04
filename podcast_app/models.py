@@ -34,6 +34,7 @@ class Episode(models.Model):
 	ad_timestamps = models.JSONField(null=True, blank=True)
 	transcription = models.JSONField(null=True, blank=True)
 	scanned_transcripts = models.TextField(null=False, blank=True, default="")
+	cuts = models.JSONField(null=True, blank=True)
 
 	def __str__(self):
 		return self.title
