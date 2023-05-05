@@ -1,0 +1,24 @@
+.videoWrapper {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+.description {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.videoWrapper > video {
+    width: 98%;
+    height: 500px;
+    border: 1px solid #ccc;
+    margin: 10px;
+    margin-top: 3em;
+    padding: 5px;
+    background-color: #f9f9f9;
+}
+
+label {
+    font-size: 20px;
+    text-align: center;
+}

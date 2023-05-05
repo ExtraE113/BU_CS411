@@ -1,19 +1,20 @@
 import './App.css';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {Login} from "../src/components/scripts/Login";
-import {Home} from "../src/components/scripts/Home";
-import {Navigation} from "../src/components/scripts/Navigations";
-import {Logout} from "../src/components/scripts/Logout";
+import { BrowserRouter,Routes,Route,Link } from "react-router-dom";
+import NavBar from './components/scripts/Navbar';
+import Login from './components/scripts/Login';
+import Dashboard from './components/scripts/Dashboard';
+import Watch from './components/scripts/Watch';
 
 function App() {
-    return <BrowserRouter>
-    <Navigation></Navigation>
-        <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/logout" element={<Logout/>}/>
-        </Routes>
-    </BrowserRouter>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element = {<Login />} />
+        <Route path="/home" element = {[<NavBar />, <Dashboard />] } />
+        <Route path="/watch" element = {<Watch />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
