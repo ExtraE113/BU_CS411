@@ -167,7 +167,9 @@ class Episode(models.Model):
 			# ad is the ad to locate
 
 			string_transcript_full = "".join([elem['value'] for elem in flattened_transcript[start:end]])
-			assert ad in string_transcript_full, f"ad {ad} not in working area"
+			string_transcript_full = string_transcript_full.replace("\n", "")
+			ad = ad.replace("\n", "")
+			assert ad in string_transcript_full, f"ad {ad} not in working area from {start} to {end}"
 			# print(f"ad {ad} in working area")
 			midpoint = (start + end) // 2
 
