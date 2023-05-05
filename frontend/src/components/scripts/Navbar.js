@@ -1,8 +1,6 @@
 import styles from "../styles/Navbar.module.css";
-import { getAuth } from "firebase/auth";
 
 function NavBar() {
-    const auth = getAuth();
     return(
         <nav className = {styles.navbarWrapper}>
             <div className = {styles.logoWrapper}>
