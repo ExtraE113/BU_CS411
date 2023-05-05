@@ -2,25 +2,33 @@
     margin-left: 2em;
     width: 300px;
     height: 200px;
-    background-color: #141414;
-    border-radius: 10px;
+    background-image: url(https://media.istockphoto.com/id/1186178560/vector/podcast-icon-on-a-white-background-icon-stamp-logo-stock-vector-illustration.jpg?s=612x612&w=0&k=20&c=jbONUIxO_82EAbMq_Dpxn8nZfv44z8hkq2_vhzpjC48=);
+    background-size: 95% 99%;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
     overflow: hidden;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: 0.5s;
     position: relative;
+    font-size: 14px;
 }
 
 .cardWrapper:hover {
-    height: 300px;
+    width: 310px;
+    height: 210px;
     transition: 0.5s;
     cursor: pointer;
 }
 
+.description {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 2em;
+}
+
 .title {
-    position: absolute;
-    bottom: 0;
+    margin-left: 4em;
 }

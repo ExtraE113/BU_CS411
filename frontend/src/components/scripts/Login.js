@@ -1,6 +1,5 @@
 import styles from "../styles/Login.module.css";
 import {useState} from 'react';
-import axios from 'axios';
 import React from 'react';
 import {GoogleOAuthProvider, GoogleLogin} from '@react-oauth/google';
 
@@ -22,7 +21,10 @@ const onFailure = (response) => {
 
 const Login = () => {
     return (
-        <div>
+        <div className = {styles.loginWrapper}>
+            <h1>
+                Sign In With Google.
+            </h1>
             <GoogleOAuthProvider clientId={clientId}>
                 <GoogleLogin
                     render={({signIn}) => (
