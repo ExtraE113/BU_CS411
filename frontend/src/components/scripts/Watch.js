@@ -24,12 +24,14 @@ function Watch() {
         setAdBlockerEnabled(!adBlockerEnabled);
     }
 
+    const descriptionWithoutTags = data.description.replace(/(<([^>]+)>)/gi, '');
+
     return(
         <div className = {styles.videoWrapper}>
             <video src={data.link} controls ref={videoRef} onTimeUpdate={handleTimeUpdate}>
                 Your browser does not support the video tag.
             </video>
-            <p className = {styles.description}>{data.description}</p>
+            <p className = {styles.description}>{descriptionWithoutTags}</p>
             <label htmlFor="toggle-ads">There is an ad from {data.ad[0]} to {data.ad[1]} seconds. Enable ad-blocker?</label>
             <input type="checkbox" id="toggle-ads" checked={adBlockerEnabled} onChange={handleToggleAds} />
         </div>

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import PodcastCards from "./PodcastCards";
 
 function Dashboard() {
-    const [podcasts, setPodcasts] = useState(null);
+    const [podcasts, setPodcasts] = useState([]);
     const [user, setUser] = useState([]);
 
     useEffect(() => {
