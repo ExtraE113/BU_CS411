@@ -44,6 +44,17 @@ class PodcastList(generics.ListAPIView):
 		return reject_if_unauthorized(super().list, request, *args, **kwargs)
 
 
+class PodcastSearch(generics.ListAPIView):
+	serializer_class = PodcastSerializer
+
+	def get_queryset(self):
+		query = self.request.GET.get('title')
+		return Podcast.objects.filter(title__icontains=query)
+
+	def list(self, request, *args, **kwargs):
+		return reject_if_unauthorized(super().list, request, *args, **kwargs)
+
+
 class EpisodeList(generics.ListAPIView):
 	serializer_class = EpisodeSerializer
 

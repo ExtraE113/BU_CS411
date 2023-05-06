@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('podcasts/', views.PodcastList.as_view(), name='podcast-list'),
+    path('podcasts/search', views.PodcastSearch.as_view(), name='podcast-search'),
     path('podcasts/<int:podcast_id>/', views.IndividualPodcast.as_view(), name='podcast'),
     path('podcasts/<int:podcast_id>/episodes/', views.EpisodeList.as_view(), name='episode-list'),
     path('podcasts/<int:podcast_id>/subscribe/', views.SubscribeToPodcast.as_view(), name='subscribe-podcast'),
