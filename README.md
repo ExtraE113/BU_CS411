@@ -7,9 +7,9 @@ https://www.youtube.com/watch?v=6Wh8t40Xz0o&ab_channel=IvanYang
 Our project is an adblocker for podcasts, where users can toggle whether they want to listen to podcasts with ads or without ads. It utilizes revAI to generate a transcription of a podcast and uses NLP to splice out areas where an ad is, and returns both the start and end times of the suspected ad, and skips the playback within those times when a user views the podcast. 
 
 ### Table of contents
-Built with
-Installation
-Running the app
+- [Built with](#built-with)
+- [Installation](#installation-npm-and-firebase)
+- [Running the app](#running-the-app)
 
 ### Built with:
 React frontend, Django backend.
@@ -24,7 +24,8 @@ cd your-project
 
 ### Install the project dependencies:
 
-npm i
+### `npm i`
+
 This will install all the dependencies required to run the front end of the project. You should see a node_modules directory created in your project directory. The dependencies used are:
 
 - "@react-oauth/google": "^0.11.0"
@@ -41,13 +42,15 @@ This will install all the dependencies required to run the front end of the proj
 ### Running the App:
 To run the backend, make sure to download all required packages using the command
 
-pip install -r requirements.txt
+### `pip install -r requirements.txt`
 
-Then run python3 manage.py runserver to start the backend. 
+Then run
 
-To start the frontent in the project directory, you can first cd frontend to change directory to the frontend and then run:
+### `python3 manage.py runserver` 
 
-npm start
+to start the backend. To start the frontend in the project directory, you can first cd frontend to change directory to the frontend and then run:
+
+### `npm start`
 
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
@@ -55,11 +58,15 @@ Open http://localhost:3000 to view it in your browser.
 The page will reload when you make changes.
 You may also see any lint errors in the console.
 
-npm test
+### `npm test`
+
+
 Launches the test runner in the interactive watch mode.
 See the section about running tests for more information.
 
-npm run build
+### `npm run build`
+
+
 Builds the app for production to the build folder.
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
@@ -68,7 +75,8 @@ Your app is ready to be deployed!
 
 See the section about deployment for more information.
 
-npm run eject
+### `npm run eject`
+
 Note: this is a one-way operation. Once you eject, you can't go back!
 
 If you aren't satisfied with the build tool and configuration choices, you can eject at any time. This command will remove the single build dependency from your project.
