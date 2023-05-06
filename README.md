@@ -1,5 +1,8 @@
 # BU_CS411
 
+### Demo Video
+https://www.youtube.com/watch?v=6Wh8t40Xz0o&ab_channel=IvanYang
+
 ### Project Description:
 Our project is an adblocker for podcasts, where users can toggle whether they want to listen to podcasts with ads or without ads. It utilizes revAI to generate a transcription of a podcast and uses NLP to splice out areas where an ad is, and returns both the start and end times of the suspected ad, and skips the playback within those times when a user views the podcast. 
 
